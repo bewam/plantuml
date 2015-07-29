@@ -23,11 +23,11 @@ module.exports = Plantuml =
       prepared = prepareFile(buffer)
       if prepared
         pngPathes = getPngPathesFromBuffer(buffer)
-        pngPathes = [ getPngFilePath(buffer.file) ] unless pngPathes # toString.call(pngPathes) != '[object Array]'
+        pngPathes = [ getPngFilePath(buffer.file) ] unless pngPathes
         umlFilePath = buffer.file.path
 
         for pngFilePath in pngPathes
-            writeAndOpenPng(umlFilePath, pngFilePath)
+          writeAndOpenPng(umlFilePath, pngFilePath)
       else
         atom.notifications.addWarning('Could not write file.', {
           detail:'Please make sure file can be written to disk.'})
