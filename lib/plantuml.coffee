@@ -1,6 +1,6 @@
 {CompositeDisposable} = require 'atom'
 
-{prepareFile, getPngFilePath} = require './file-utils'
+{prepareFile, getPngFilePath, getPngPathesFromBuffer} = require './file-utils'
 {writeAndOpenPng} = require './plantuml-utils'
 
 module.exports = Plantuml =
@@ -22,9 +22,12 @@ module.exports = Plantuml =
       buffer = atom.workspace.getActivePaneItem().buffer
       prepared = prepareFile(buffer)
       if prepared
-        pngFilePath = getPngFilePath(buffer.file)
+        pngPathes = getPngPathesFromBuffer(buffer)
+        pngPathes = [ getPngFilePath(buffer.file) ] unless pngPathes # toString.call(pngPathes) != '[object Array]'
         umlFilePath = buffer.file.path
-        writeAndOpenPng(umlFilePath,pngFilePath)
+
+        for pngFilePath in pngPathes
+            writeAndOpenPng(umlFilePath, pngFilePath)
       else
         atom.notifications.addWarning('Could not write file.', {
           detail:'Please make sure file can be written to disk.'})

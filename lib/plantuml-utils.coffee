@@ -16,7 +16,7 @@ class PlantUml
       else
         atom.notifications.addWarning('PlantUml could not generate file.', {
           detail:'Please make sure PlantUml can write
-           to location of original file.'})
+           to location of target file ('+pngFilePath+').'})
 
     startTime = Date.now()
     new BufferedProcess({command, args, exit})
