@@ -47,7 +47,7 @@ class FileUtil
         dir = if isDir then expPath else path.dirname(expPath)
         # let the current path if absolute else takes buffer one
         unless path.isAbsolute(dir)
-          dir = [path.dirname(bufferFile.path), dir].join(path.sep)
+          dir = path.join(path.dirname(bufferFile.path), dir)
         # fetch filename, if none, gives editor's one
         if isDir
           # if it's a generated name aka no name
@@ -55,7 +55,7 @@ class FileUtil
           count++
         else
           fileName = path.basename(expPath)
-        pathes.push([dir, fileName].join(path.sep))
+        pathes.push(path.join(dir, fileName))
     return pathes
 
 # private
