@@ -29,12 +29,7 @@ describe "Plantuml", ->
     it "generates an in-file declared png", ->
       done = false
 
-      buffer.onDidSave((event)->
-        console.log(event)
-     )
-
       atom.workspace.onDidOpen((event)->
-        console.log(event)
         if event.uri.indexOf("generated.png") > -1
           done = true
       )
